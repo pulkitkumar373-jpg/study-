@@ -1,0 +1,3324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillSwap Study</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#312e81,#581c87);
+    color:white;
+}
+
+/* ---------- COMMON ---------- */
+
+button{
+    border:none;
+    cursor:pointer;
+}
+
+.container{
+    width:92%;
+    max-width:1200px;
+    margin:auto;
+}
+
+.glass{
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.18);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-radius:22px;
+    box-shadow:0 20px 50px rgba(0,0,0,.20);
+}
+
+/* ---------- NAVBAR ---------- */
+
+nav{
+    height:75px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+    background:rgba(15,23,42,.55);
+    backdrop-filter:blur(15px);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#a78bfa;
+}
+
+.nav-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.btn{
+    padding:11px 18px;
+    border-radius:12px;
+    color:white;
+    background:#7c3aed;
+    font-weight:bold;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    opacity:.9;
+}
+
+.btn-outline{
+    background:transparent;
+    border:1px solid #a78bfa;
+}
+
+/* ---------- HERO ---------- */
+
+.hero{
+    padding:90px 0 60px;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#c4b5fd;
+}
+
+.hero p{
+    color:#ddd;
+    max-width:700px;
+    margin:auto;
+    line-height:1.7;
+    font-size:18px;
+}
+
+.search{
+    margin:35px auto;
+    max-width:600px;
+    display:flex;
+}
+
+.search input{
+    flex:1;
+    padding:16px;
+    border:none;
+    border-radius:14px 0 0 14px;
+    outline:none;
+    font-size:16px;
+}
+
+.search button{
+    width:120px;
+    background:#7c3aed;
+    color:white;
+    border-radius:0 14px 14px 0;
+}
+
+/* ---------- SECTIONS ---------- */
+
+section{
+    padding:50px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.section-title h2{
+    font-size:32px;
+}
+
+.section-title p{
+    color:#cbd5e1;
+    margin-top:8px;
+}
+
+/* ---------- SKILLS ---------- */
+
+.skill-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.skill-card{
+    padding:25px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.skill-card:hover{
+    transform:translateY(-7px);
+    border-color:#a78bfa;
+}
+
+.skill-icon{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.skill-card h3{
+    margin-bottom:8px;
+}
+
+.skill-card p{
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+/* ---------- FEATURES ---------- */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.feature{
+    padding:25px;
+}
+
+.feature-icon{
+    font-size:35px;
+    margin-bottom:12px;
+}
+
+/* ---------- LOGIN ---------- */
+
+.auth-page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+.auth-box{
+    width:100%;
+    max-width:430px;
+    padding:35px;
+}
+
+.auth-box h2{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.auth-box .subtitle{
+    text-align:center;
+    color:#cbd5e1;
+    margin-bottom:25px;
+}
+
+.input-group{
+    margin-bottom:16px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:7px;
+    color:#ddd;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #475569;
+    background:rgba(255,255,255,.08);
+    color:white;
+    outline:none;
+}
+
+.input-group input:focus{
+    border-color:#a78bfa;
+}
+
+.auth-btn{
+    width:100%;
+    padding:14px;
+    background:#7c3aed;
+    color:white;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.auth-switch{
+    text-align:center;
+    margin-top:20px;
+    color:#cbd5e1;
+}
+
+.auth-switch span{
+    color:#c4b5fd;
+    cursor:pointer;
+}
+
+/* ---------- APP ---------- */
+
+#appPage{
+    display:none;
+}
+
+.app-header{
+    padding:25px 0;
+}
+
+.user-box{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.avatar{
+    width:50px;
+    height:50px;
+    background:#7c3aed;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.user-info{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+/* ---------- DASHBOARD ---------- */
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+}
+
+.stat-card{
+    padding:22px;
+}
+
+.stat-card h3{
+    font-size:30px;
+    margin:8px 0;
+}
+
+.stat-card p{
+    color:#cbd5e1;
+}
+
+/* ---------- TOPICS ---------- */
+
+.topic-layout{
+    display:grid;
+    grid-template-columns:270px 1fr;
+    gap:20px;
+}
+
+.topic-sidebar{
+    padding:20px;
+    height:max-content;
+}
+
+.topic-btn{
+    display:block;
+    width:100%;
+    text-align:left;
+    padding:13px;
+    margin:7px 0;
+    border-radius:10px;
+    color:white;
+    background:transparent;
+}
+
+.topic-btn:hover,
+.topic-btn.active{
+    background:#7c3aed;
+}
+
+.lesson{
+    padding:30px;
+}
+
+.lesson h1{
+    margin-bottom:10px;
+}
+
+.lesson-description{
+    color:#cbd5e1;
+    margin-bottom:25px;
+    line-height:1.7;
+}
+
+.tabs{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.tab{
+    padding:10px 15px;
+    border-radius:10px;
+    background:rgba(255,255,255,.08);
+    color:white;
+}
+
+.tab.active{
+    background:#7c3aed;
+}
+
+.content-box{
+    padding:25px;
+    line-height:1.7;
+}
+
+.code-box{
+    background:#020617;
+    padding:20px;
+    border-radius:12px;
+    overflow:auto;
+    margin-top:15px;
+    color:#d8b4fe;
+}
+
+.action-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    background:#334155;
+    color:#ddd;
+    font-size:12px;
+}
+
+/* ---------- MCQ ---------- */
+
+.mcq{
+    padding:20px;
+    margin-bottom:15px;
+    border-radius:15px;
+    background:rgba(255,255,255,.06);
+}
+
+.option{
+    padding:12px;
+    border:1px solid #475569;
+    border-radius:10px;
+    margin-top:8px;
+    cursor:pointer;
+}
+
+.option:hover{
+    background:rgba(124,58,237,.3);
+}
+
+.correct{
+    background:#166534 !important;
+}
+
+.wrong{
+    background:#991b1b !important;
+}
+
+/* ---------- PROGRESS ---------- */
+
+.progress{
+    height:12px;
+    background:#334155;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.progress-bar{
+    height:100%;
+    background:#a78bfa;
+    width:0%;
+}
+
+/* ---------- TODO ---------- */
+
+.todo-input{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.todo-input input{
+    flex:1;
+    padding:14px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+}
+
+.todo{
+    display:flex;
+    justify-content:space-between;
+    padding:15px;
+    background:rgba(255,255,255,.07);
+    border-radius:10px;
+    margin:8px 0;
+}
+
+.todo.done{
+    text-decoration:line-through;
+    opacity:.5;
+}
+
+/* ---------- TIMER ---------- */
+
+.timer{
+    text-align:center;
+}
+
+.timer-display{
+    font-size:70px;
+    font-weight:bold;
+    margin:20px;
+}
+
+/* ---------- LIBRARY ---------- */
+
+.library-card{
+    padding:20px;
+    margin-bottom:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* ---------- MODAL ---------- */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:500;
+    padding:20px;
+}
+
+.modal-box{
+    width:100%;
+    max-width:450px;
+    padding:30px;
+}
+
+.close{
+    float:right;
+    font-size:25px;
+    cursor:pointer;
+}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+    text-align:center;
+    padding:40px;
+    color:#cbd5e1;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:700px){
+    .hero h1{
+        font-size:38px;
+    }
+
+    .topic-layout{
+        grid-template-columns:1fr;
+    }
+
+    nav{
+        padding:0 3%;
+    }
+
+    .nav-buttons{
+        gap:5px;
+    }
+
+    .nav-buttons button{
+        padding:8px 10px;
+        font-size:12px;
+    }
+
+    .timer-display{
+        font-size:50px;
+    }
+}
+#loginPage,#registerPage{display:none!important;}
+
+.feature-click{
+    cursor:pointer;
+    transition:transform .2s ease, border-color .2s ease, background .2s ease;
+}
+.feature-click:hover{
+    transform:translateY(-5px);
+}
+.feature-click:active{
+    transform:translateY(-2px);
+}
+
+
+/* ================= SMART QUIZ LAB ================= */
+.quiz-lab{
+    margin-top:22px;
+}
+.quiz-controls{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:12px;
+    margin-top:16px;
+}
+.quiz-controls input,.quiz-controls select,.quiz-notes{
+    width:100%;
+    padding:13px 15px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:12px;
+    background:rgba(255,255,255,.08);
+    color:white;
+    outline:none;
+}
+.quiz-controls select option{
+    color:#111827;
+}
+.quiz-notes{
+    margin-top:12px;
+    min-height:80px;
+    resize:vertical;
+}
+.quiz-mode-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:12px;
+}
+.quiz-chip{
+    padding:9px 14px;
+    border-radius:999px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    color:white;
+    cursor:pointer;
+}
+.quiz-chip.active{
+    background:rgba(139,92,246,.55);
+}
+.quiz-topbar{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+    margin-bottom:15px;
+}
+.quiz-progress-wrap{
+    height:9px;
+    background:rgba(255,255,255,.12);
+    border-radius:999px;
+    overflow:hidden;
+    margin:10px 0 18px;
+}
+.quiz-progress-fill{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#38bdf8,#a78bfa,#f472b6);
+    transition:width .25s ease;
+}
+.quiz-option{
+    width:100%;
+    text-align:left;
+    color:white;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    padding:14px;
+    border-radius:12px;
+    margin:8px 0;
+    transition:.2s;
+}
+.quiz-option:hover{
+    transform:translateX(4px);
+    background:rgba(255,255,255,.11);
+}
+.quiz-option.correct{background:rgba(34,197,94,.25)!important;border-color:#22c55e!important}
+.quiz-option.wrong{background:rgba(239,68,68,.25)!important;border-color:#ef4444!important}
+.quiz-explain{
+    margin-top:14px;
+    padding:12px;
+    border-radius:12px;
+    background:rgba(255,255,255,.06);
+}
+.quiz-result-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin:18px 0;
+}
+.quiz-result-card{
+    padding:18px;
+    text-align:center;
+    border-radius:14px;
+    background:rgba(255,255,255,.07);
+}
+@media(max-width:800px){
+    .quiz-controls{grid-template-columns:1fr 1fr}
+    .quiz-result-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+    .quiz-controls{grid-template-columns:1fr}
+}
+
+
+
+/* ===== NOTES + CODING PRACTICE UPGRADE ===== */
+.notes-editor-card,.coding-original,.coding-question-card{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:18px;
+    padding:18px;
+    margin-top:18px;
+}
+.topic-notes-editor,.coding-answer-box{
+    width:100%;
+    min-height:220px;
+    margin-top:12px;
+    padding:16px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(15,23,42,.75);
+    color:#fff;
+    resize:vertical;
+    outline:none;
+    font-family:inherit;
+    line-height:1.6;
+}
+.topic-notes-editor:focus,.coding-answer-box:focus{
+    border-color:#8b5cf6;
+    box-shadow:0 0 0 3px rgba(139,92,246,.15);
+}
+.notes-actions,.coding-controls,.coding-practice-toolbar{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-top:12px;
+}
+.coding-controls select,.quiz-controls select,.quiz-controls input{
+    min-height:44px;
+    border-radius:12px;
+    padding:8px 12px;
+    background:rgba(15,23,42,.85);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.15);
+}
+.coding-question-card{
+    transition:transform .2s ease,border-color .2s ease;
+}
+.coding-question-card:hover{
+    transform:translateY(-2px);
+    border-color:rgba(139,92,246,.5);
+}
+.coding-q-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+.quick-notes{
+    margin-top:20px;
+    padding:18px;
+    border-radius:16px;
+    background:rgba(139,92,246,.08);
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= LOGIN ================= -->
+
+<div id="loginPage" class="auth-page">
+
+    <div class="auth-box glass">
+
+        <h2>🔐 Welcome Back</h2>
+        <p class="subtitle">Login to SkillSwap Study</p>
+
+        <div class="input-group">
+            <label>Email</label>
+            <input id="loginEmail" type="email" placeholder="Enter your email">
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input id="loginPassword" type="password" placeholder="Enter password">
+        </div>
+
+        <button class="auth-btn" onclick="login()">Login</button>
+
+        <div class="auth-switch">
+            Don't have an account?
+            <span onclick="showRegister()">Create Account</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= REGISTER ================= -->
+
+<div id="registerPage" class="auth-page" style="display:none;">
+
+    <div class="auth-box glass">
+
+        <h2>🚀 Create Account</h2>
+        <p class="subtitle">Start your learning journey</p>
+
+        <div class="input-group">
+            <label>Name</label>
+            <input id="registerName" type="text" placeholder="Your name">
+        </div>
+
+        <div class="input-group">
+            <label>Email</label>
+            <input id="registerEmail" type="email" placeholder="Your email">
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input id="registerPassword" type="password" placeholder="Create password">
+        </div>
+
+        <button class="auth-btn" onclick="register()">Register</button>
+
+        <div class="auth-switch">
+            Already have an account?
+            <span onclick="showLogin()">Login</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= HOME ================= -->
+
+<div id="homePage" style="display:block;">
+
+<nav>
+
+    <div class="logo">
+        Skill<span>Swap</span> 📚
+    </div>
+
+    <div class="nav-buttons">
+        <button class="btn btn-outline" onclick="openStudy()">Study</button>
+        
+    </div>
+
+</nav>
+
+<div class="hero">
+
+    <div class="container">
+
+        <h1>
+            Learn. Practice. <span>Grow.</span>
+        </h1>
+
+        <p>
+            SkillSwap Study is your personal learning platform.
+            Learn programming, practice questions, take quizzes
+            and track your progress.
+        </p>
+
+        <div class="search">
+            <input
+                id="skillSearch"
+                type="text"
+                placeholder="Search Python, C++, AI, SQL..."
+                oninput="searchSkills()"
+            >
+            <button onclick="searchSkills()">Search</button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+    <h2>🔥 Explore Skills</h2>
+    <p>Choose a skill and start learning</p>
+</div>
+
+<div id="skillsGrid" class="skill-grid"></div>
+
+</div>
+
+</section>
+
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+    <h2>✨ Study Features</h2>
+</div>
+
+<div class="features">
+
+<div class="feature glass feature-click" onclick="openFeature('notes')">
+    <div class="feature-icon">📖</div>
+    <h3>Study Notes</h3>
+    <p>Simple topic-wise notes for quick learning.</p>
+</div>
+
+<div class="feature glass feature-click" onclick="openFeature('quiz')">
+    <div class="feature-icon">🧠</div>
+    <h3>Quiz Practice</h3>
+    <p>Test your knowledge with topic quizzes.</p>
+</div>
+
+<div class="feature glass feature-click" onclick="openFeature('coding')">
+    <div class="feature-icon">💻</div>
+    <h3>Coding Practice</h3>
+    <p>Practice programming questions.</p>
+</div>
+
+<div class="feature glass feature-click" onclick="openFeature('progress')">
+    <div class="feature-icon">📊</div>
+    <h3>Progress Tracking</h3>
+    <p>Track your completed topics and scores.</p>
+</div>
+
+<div class="feature glass feature-click" onclick="openFeature('bookmarks')">
+    <div class="feature-icon">🔖</div>
+    <h3>Bookmarks</h3>
+    <p>Save important topics for revision.</p>
+</div>
+
+<div class="feature glass feature-click" onclick="openFeature('achievements')">
+    <div class="feature-icon">🏆</div>
+    <h3>Achievements</h3>
+    <p>Earn badges as you learn.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+    © 2026 SkillSwap Study — Learn a Skill. Share a Skill.
+</footer>
+
+</div>
+
+
+<!-- ================= APP ================= -->
+
+<div id="appPage" style="display:none;">
+
+<nav>
+
+<div class="logo">
+    Skill<span>Swap</span> Study
+</div>
+
+<div class="nav-buttons">
+    <button class="btn btn-outline" onclick="showHome()">Home</button>
+    <button class="btn" onclick="logout()">Logout</button>
+</div>
+
+</nav>
+
+
+<div class="container">
+
+<section class="app-header">
+
+<div class="user-box">
+
+<div class="user-info">
+
+<div id="avatar" class="avatar">U</div>
+
+<div>
+    <h2 id="welcomeUser">Welcome</h2>
+    <p style="color:#cbd5e1">Keep learning 🚀</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboardSection">
+
+<div class="section-title">
+    <h2>📊 Your Study Dashboard</h2>
+</div>
+
+<div class="dashboard-grid">
+
+<div class="stat-card glass">
+    <p>Completed Topics</p>
+    <h3 id="completedCount">0</h3>
+</div>
+
+<div class="stat-card glass">
+    <p>Bookmarks</p>
+    <h3 id="bookmarkCount">0</h3>
+</div>
+
+<div class="stat-card glass">
+    <p>Quiz Score</p>
+    <h3 id="quizScore">0%</h3>
+</div>
+
+<div class="stat-card glass">
+    <p>Study Streak</p>
+    <h3 id="streak">1 🔥</h3>
+</div>
+
+<div class="stat-card glass">
+    <p>Quiz Attempts</p>
+    <h3 id="quizAttempts">0</h3>
+</div>
+
+</div>
+
+
+</section>
+
+<!-- SMART QUIZ LAB -->
+<section id="quizLabSection" class="quiz-lab">
+<div class="glass content-box">
+    <div class="section-title">
+        <h2>🧠 Smart Quiz Lab</h2>
+        <p>Generate a long practice quiz from any topic in your study library.</p>
+    </div>
+
+    <div class="quiz-controls">
+        <input id="customQuizTopic" placeholder="Enter topic e.g. Arrays, Cybersecurity, Python">
+        <select id="customQuizCount">
+            <option value="10">10 Questions</option>
+            <option value="20" selected>20 Questions</option>
+            <option value="30">30 Questions</option>
+            <option value="40">40 Questions</option>
+            <option value="50">50 Questions</option>
+            <option value="60">60 Questions</option>
+            <option value="70">70 Questions</option>
+            <option value="80">80 Questions</option>
+            <option value="90">90 Questions</option>
+            <option value="100">100 Questions</option>
+        </select>
+        <select id="customQuizDifficulty">
+            <option value="mixed">Mixed Difficulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+        <button class="btn" onclick="startSmartQuiz()">🚀 Generate Quiz</button>
+    </div>
+
+    <textarea id="customQuizNotes" class="quiz-notes"
+        placeholder="Optional: paste your notes/content here. The quiz will use this content when the topic is not in the library."></textarea>
+
+    <div class="quiz-mode-row">
+        <button id="quizModeNormal" class="quiz-chip active" onclick="setQuizMode('normal',this)">🎯 Practice</button>
+        <button id="quizModeTimed" class="quiz-chip" onclick="setQuizMode('timed',this)">⚡ Time Challenge</button>
+        <button id="quizModeExam" class="quiz-chip" onclick="setQuizMode('exam',this)">📝 Exam Mode</button>
+    </div>
+
+    <div id="smartQuizMessage" style="margin-top:12px;color:#cbd5e1">
+        Tip: choose a topic from your library or paste notes for a custom-topic quiz.
+    </div>
+</div>
+</section>
+
+
+<!-- TIMER -->
+
+<section>
+
+<div class="glass content-box timer">
+
+<h2>⏱️ Study Timer</h2>
+
+<div id="timerDisplay" class="timer-display">
+    25:00
+</div>
+
+<button class="btn" onclick="startTimer()">Start</button>
+<button class="btn btn-outline" onclick="pauseTimer()">Pause</button>
+<button class="btn btn-outline" onclick="resetTimer()">Reset</button>
+
+</div>
+
+</section>
+
+
+<!-- PLANNER -->
+
+<section>
+
+<div class="glass content-box">
+
+<h2>📋 Study Planner</h2>
+
+<br>
+
+<div class="todo-input">
+
+<input id="todoInput" placeholder="Add study task...">
+
+<button class="btn" onclick="addTodo()">Add</button>
+
+</div>
+
+<div id="todoList"></div>
+
+</div>
+
+</section>
+
+
+<!-- BOOKMARKS -->
+
+<section id="librarySection">
+
+<div class="section-title">
+    <h2>🔖 My Library</h2>
+    <p>Your saved study topics</p>
+</div>
+
+<div id="library"></div>
+
+</section>
+
+
+<!-- ACHIEVEMENTS -->
+
+<section id="achievementsSection">
+
+<div class="section-title">
+    <h2>🏆 Achievements</h2>
+</div>
+
+<div id="achievements" class="features"></div>
+
+</section>
+
+</div>
+
+</div>
+
+
+<!-- ================= TOPIC PAGE ================= -->
+
+<div id="topicPage" style="display:none;">
+
+<nav>
+
+<div class="logo">
+    Skill<span>Swap</span>
+</div>
+
+<button class="btn" onclick="showHome()">← Back</button>
+
+</nav>
+
+<div class="container">
+
+<section>
+
+<div class="topic-layout">
+
+<div class="topic-sidebar glass">
+
+<h3 id="skillTitle">Skill</h3>
+
+<br>
+
+<div id="topicList"></div>
+
+</div>
+
+
+<div class="lesson glass">
+
+<h1 id="topicTitle">Topic</h1>
+
+<div id="topicDescription" class="lesson-description"></div>
+
+<div class="tabs">
+
+<button class="tab active" onclick="switchTab('study',this)">
+📖 Study
+</button>
+
+<button class="tab" onclick="switchTab('example',this)">
+💻 Example
+</button>
+
+<button class="tab" onclick="switchTab('mcq',this)">
+📝 MCQ
+</button>
+
+<button class="tab" onclick="switchTab('coding',this)">
+👨‍💻 Coding
+</button>
+
+<button class="tab" onclick="switchTab('quiz',this)">
+🧠 Quiz
+</button>
+
+</div>
+
+<div id="lessonContent"></div>
+
+<div class="action-row">
+
+<button id="bookmarkBtn" class="btn" onclick="toggleBookmark()">
+🔖 Bookmark
+</button>
+
+<button class="btn" onclick="markComplete()">
+✅ Mark Complete
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   USER SYSTEM
+===================================================== */
+
+let currentUser = JSON.parse(localStorage.getItem("skillswap_guest") || "null");
+if(!currentUser){
+    currentUser={id:"guest",name:"Student",email:"",password:"",
+    completed:[],bookmarks:[],quizScore:0,todos:[],lastLogin:new Date().toDateString()};
+    localStorage.setItem("skillswap_guest",JSON.stringify(currentUser));
+}
+
+function saveUsers(){
+    localStorage.setItem("skillswap_users", JSON.stringify(users));
+}
+
+function showRegister(){showHome();}
+function showLogin(){showHome();}
+
+function register(){showHome();}
+function login(){showHome();}
+
+function updateLoginDate(){
+    if(!currentUser) return;
+    currentUser.lastLogin=new Date().toDateString();
+    saveCurrentUser();
+}
+
+function logout(){
+    // Login is disabled in this local version, so return safely to Home.
+    showHome();
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+const skills={
+
+"C++":{
+icon:"💻",
+description:"Learn C++ programming from basics to OOP.",
+topics:{
+"Introduction":{
+level:"Beginner",
+desc:"C++ is a powerful programming language used for software development, games and competitive programming.",
+code:`#include <iostream>
+using namespace std;
+
+int main(){
+    cout << "Hello World";
+    return 0;
+}`,
+mcq:[
+["Who developed C++?","Bjarne Stroustrup",["Dennis Ritchie","James Gosling","Guido van Rossum"]],
+["Which symbol ends a C++ statement?",";",[":",".",","]]
+],
+coding:"Write a C++ program to print Hello World."
+},
+
+"Variables & Data Types":{
+level:"Beginner",
+desc:"Variables store data in memory. C++ provides int, float, double, char and bool data types.",
+code:`int age = 20;
+float price = 99.5;
+char grade = 'A';
+bool passed = true;`,
+mcq:[
+["Which data type stores whole numbers?","int",["float","char","bool"]]
+],
+coding:"Create variables for name, age and marks."
+},
+
+"Operators":{
+level:"Beginner",
+desc:"Operators perform mathematical and logical operations.",
+code:`int a=10;
+int b=5;
+
+cout << a+b;
+cout << a-b;
+cout << a*b;`,
+mcq:[
+["Which operator is used for addition?","+",["-","*","/"]]
+],
+coding:"Write a program to perform addition, subtraction and multiplication."
+},
+
+"If Else":{
+level:"Beginner",
+desc:"if-else is used for decision making.",
+code:`int age=18;
+
+if(age>=18)
+    cout<<"Adult";
+else
+    cout<<"Minor";`,
+mcq:[
+["Which keyword is used for condition?","if",["for","while","switch"]]
+],
+coding:"Check whether a number is positive or negative."
+},
+
+"Loops":{
+level:"Intermediate",
+desc:"Loops repeat a block of code.",
+code:`for(int i=1;i<=5;i++){
+    cout<<i<<" ";
+}`,
+mcq:[
+["Which loop is commonly used when repetitions are known?","for",["if","class","switch"]]
+],
+coding:"Print numbers from 1 to 10 using a loop."
+},
+
+"Functions":{
+level:"Intermediate",
+desc:"Functions are reusable blocks of code.",
+code:`int add(int a,int b){
+    return a+b;
+}`,
+mcq:[
+["What is the purpose of a function?","Code reusability",["Store data","Create variables","Stop program"]]
+],
+coding:"Create a function that returns the square of a number."
+},
+
+"Arrays":{
+level:"Intermediate",
+desc:"An array stores multiple values of the same type.",
+code:`int marks[5]={80,75,90,85,70};
+
+cout<<marks[0];`,
+mcq:[
+["Array indexing normally starts from?","0",["1","-1","2"]]
+],
+coding:"Create an array of 5 numbers and calculate their sum."
+},
+
+"Strings":{
+level:"Intermediate",
+desc:"Strings are used to store text.",
+code:`string name="Student";
+cout<<name;`,
+mcq:[
+["Which header supports string in C++?","<string>",["<array>","<math>","<loop>"]]
+],
+coding:"Take a name as input and print it."
+},
+
+"Pointers":{
+level:"Advanced",
+desc:"Pointers store memory addresses.",
+code:`int x=10;
+int *p=&x;
+
+cout<<*p;`,
+mcq:[
+["What does a pointer store?","Memory address",["Only text","Only decimal","Class"]]
+],
+coding:"Create a pointer to an integer and print its value."
+},
+
+"OOP":{
+level:"Advanced",
+desc:"Object Oriented Programming uses classes and objects.",
+code:`class Student{
+public:
+    string name;
+};
+
+int main(){
+    Student s;
+    s.name="Rahul";
+}`,
+mcq:[
+["OOP stands for?","Object Oriented Programming",["Object Operating Program","Open Object Programming","None"]]
+],
+coding:"Create a Student class with name and age."
+}
+},
+},
+
+
+"Python":{
+icon:"🐍",
+description:"Learn Python programming from beginner to advanced.",
+topics:{
+"Introduction":{
+level:"Beginner",
+desc:"Python is a simple and powerful programming language.",
+code:`print("Hello World")`,
+mcq:[
+["Python is known for?","Simple syntax",["Only games","Only websites","Only databases"]]
+],
+coding:"Print your name using Python."
+},
+"Variables":{
+level:"Beginner",
+desc:"Variables store values.",
+code:`name="Student"
+age=20
+marks=90`,
+mcq:[
+["Which symbol is used for assignment?","=",["==","!=","=>"]]
+],
+coding:"Create variables for name and age."
+},
+"Conditions":{
+level:"Beginner",
+desc:"Conditions allow programs to make decisions.",
+code:`age=18
+
+if age>=18:
+    print("Adult")
+else:
+    print("Minor")`,
+mcq:[
+["Which keyword checks a condition?","if",["for","def","class"]]
+],
+coding:"Check whether a number is even or odd."
+},
+"Loops":{
+level:"Intermediate",
+desc:"Loops repeat instructions.",
+code:`for i in range(1,6):
+    print(i)`,
+mcq:[
+["Which loop can iterate over a sequence?","for",["if","class","def"]]
+],
+coding:"Print numbers from 1 to 10."
+},
+"Functions":{
+level:"Intermediate",
+desc:"Functions organize reusable code.",
+code:`def add(a,b):
+    return a+b`,
+mcq:[
+["Which keyword creates a function?","def",["function","fun","create"]]
+],
+coding:"Create a function that returns the square of a number."
+},
+"Lists":{
+level:"Intermediate",
+desc:"Lists store multiple values.",
+code:`numbers=[10,20,30]
+print(numbers[0])`,
+mcq:[
+["Are Python lists mutable?","Yes",["No","Only sometimes","Never"]]
+],
+coding:"Create a list of 5 numbers."
+},
+"OOP":{
+level:"Advanced",
+desc:"Python supports object oriented programming.",
+code:`class Student:
+    def __init__(self,name):
+        self.name=name`,
+mcq:[
+["Which keyword creates a class?","class",["object","new","struct"]]
+],
+coding:"Create a Student class."
+}
+},
+},
+
+
+"JavaScript":{
+icon:"⚡",
+description:"Learn JavaScript for modern web development.",
+topics:{
+"Introduction":{
+level:"Beginner",
+desc:"JavaScript makes websites interactive.",
+code:`console.log("Hello World");`,
+mcq:[
+["JavaScript is mainly used for?","Web interactivity",["Database storage","Operating systems","Hardware"]]
+],
+coding:"Print Hello World using JavaScript."
+},
+"Variables":{
+level:"Beginner",
+desc:"JavaScript provides let, const and var.",
+code:`let age=20;
+const name="Student";`,
+mcq:[
+["Which keyword creates a constant?","const",["let","var","constant"]]
+],
+coding:"Create name and age variables."
+},
+"Functions":{
+level:"Intermediate",
+desc:"Functions contain reusable instructions.",
+code:`function add(a,b){
+ return a+b;
+}`,
+mcq:[
+["Which keyword creates a function?","function",["def","fun","method"]]
+],
+coding:"Create an addition function."
+},
+"DOM":{
+level:"Advanced",
+desc:"DOM allows JavaScript to interact with HTML.",
+code:`document.getElementById("title")
+.innerText="Hello";`,
+mcq:[
+["DOM stands for?","Document Object Model",["Data Object Model","Digital Object Method","None"]]
+],
+coding:"Change an HTML heading using JavaScript."
+}
+},
+},
+
+
+"HTML":{
+icon:"🌐",
+description:"Learn the structure of websites using HTML.",
+topics:{
+"Introduction":{
+level:"Beginner",
+desc:"HTML is used to structure web pages.",
+code:`<h1>Hello World</h1>`,
+mcq:[
+["HTML stands for?","HyperText Markup Language",["HighText Machine Language","Hyper Tool Markup Language","None"]]
+],
+coding:"Create a basic HTML page."
+},
+"Headings":{
+level:"Beginner",
+desc:"HTML provides headings from h1 to h6.",
+code:`<h1>Main Heading</h1>
+<h2>Sub Heading</h2>`,
+mcq:[
+["Largest heading is?","h1",["h6","h3","header"]]
+],
+coding:"Create h1, h2 and h3 headings."
+},
+"Links":{
+level:"Beginner",
+desc:"The anchor tag creates links.",
+code:`<a href="https://example.com">
+Visit Website
+</a>`,
+mcq:[
+["Which tag creates a hyperlink?","a",["link","href","url"]]
+],
+coding:"Create a link to Google."
+},
+"Forms":{
+level:"Intermediate",
+desc:"Forms collect user input.",
+code:`<form>
+<input type="text">
+<button>Submit</button>
+</form>`,
+mcq:[
+["Which tag creates a form?","form",["input","button","data"]]
+],
+coding:"Create a simple login form."
+}
+},
+},
+
+
+"CSS":{
+icon:"🎨",
+description:"Learn CSS for beautiful and responsive websites.",
+topics:{
+"Introduction":{
+level:"Beginner",
+desc:"CSS controls the design and appearance of HTML.",
+code:`body{
+    background:black;
+    color:white;
+}`,
+mcq:[
+["CSS is used for?","Styling",["Database","Programming","Server"]]
+],
+coding:"Change a webpage background color."
+},
+"Selectors":{
+level:"Beginner",
+desc:"Selectors choose HTML elements for styling.",
+code:`p{
+ color:red;
+}`,
+mcq:[
+["Which selector targets an element?","p",["#","@","."]]
+],
+coding:"Style a paragraph."
+},
+"Flexbox":{
+level:"Intermediate",
+desc:"Flexbox helps create flexible layouts.",
+code:`.container{
+ display:flex;
+ justify-content:center;
+}`,
+mcq:[
+["Which property activates Flexbox?","display:flex",["flex:box","position:flex","layout:flex"]]
+],
+coding:"Center a box using Flexbox."
+},
+"Responsive Design":{
+level:"Advanced",
+desc:"Responsive design makes websites work on different screen sizes.",
+code:`@media(max-width:600px){
+ body{
+   font-size:14px;
+ }
+}`,
+mcq:[
+["Which feature helps responsive design?","Media Queries",["Loops","Arrays","Functions"]]
+],
+coding:"Create a media query for mobile screens."
+}
+},
+},
+
+
+"SQL":{
+icon:"🗄️",
+description:"Learn SQL and database management.",
+topics:{
+"Introduction":{
+level:"Beginner",
+desc:"SQL is used to manage relational databases.",
+code:`CREATE TABLE students(
+ id INT,
+ name VARCHAR(50)
+);`,
+mcq:[
+["SQL is used for?","Database management",["Image editing","Gaming","Networking"]]
+],
+coding:"Create a students table."
+},
+"SELECT":{
+level:"Beginner",
+desc:"SELECT retrieves data.",
+code:`SELECT * FROM students;`,
+mcq:[
+["Which command retrieves data?","SELECT",["GET","READ","FETCH"]]
+],
+coding:"Select all records from students."
+},
+"WHERE":{
+level:"Beginner",
+desc:"WHERE filters records.",
+code:`SELECT * FROM students
+WHERE age > 18;`,
+mcq:[
+["Which clause filters records?","WHERE",["FILTER","IF","CHECK"]]
+],
+coding:"Find students whose age is greater than 18."
+},
+"INSERT":{
+level:"Intermediate",
+desc:"INSERT adds new records.",
+code:`INSERT INTO students
+VALUES(1,'Rahul');`,
+mcq:[
+["Which command adds data?","INSERT",["ADD","PUT","CREATE"]]
+],
+coding:"Insert a student record."
+},
+"UPDATE":{
+level:"Intermediate",
+desc:"UPDATE changes existing records.",
+code:`UPDATE students
+SET name='Aman'
+WHERE id=1;`,
+mcq:[
+["Which command modifies records?","UPDATE",["CHANGE","MODIFY","EDIT"]]
+],
+coding:"Update a student's name."
+}
+},
+},
+
+
+"AI & ML":{
+icon:"🤖",
+description:"Learn Artificial Intelligence and Machine Learning.",
+topics:{
+"Introduction":{
+level:"Beginner",
+desc:"AI enables machines to perform tasks that normally require human intelligence.",
+code:`AI System
+   ↓
+Data
+   ↓
+Model
+   ↓
+Prediction`,
+mcq:[
+["AI stands for?","Artificial Intelligence",["Automatic Internet","Advanced Input","Artificial Internet"]]
+],
+coding:"Write three applications of AI."
+},
+"Machine Learning":{
+level:"Beginner",
+desc:"Machine Learning allows systems to learn patterns from data.",
+code:`Data
+ ↓
+Training
+ ↓
+Model
+ ↓
+Prediction`,
+mcq:[
+["ML is a subset of?","AI",["HTML","SQL","CSS"]]
+],
+coding:"Give two examples of machine learning applications."
+},
+"Supervised Learning":{
+level:"Intermediate",
+desc:"Supervised learning uses labelled training data.",
+code:`Input + Label
+      ↓
+   Model
+      ↓
+ Prediction`,
+mcq:[
+["Supervised learning uses?","Labelled data",["No data","Only images","Only text"]]
+],
+coding:"Give an example of supervised learning."
+},
+"Unsupervised Learning":{
+level:"Intermediate",
+desc:"Unsupervised learning finds patterns without labelled outputs.",
+code:`Data
+ ↓
+Algorithm
+ ↓
+Clusters`,
+mcq:[
+["Unsupervised learning uses labelled data?","No",["Yes","Always","Only sometimes"]]
+],
+coding:"Give an example of clustering."
+},
+"Deep Learning":{
+level:"Advanced",
+desc:"Deep Learning uses neural networks with multiple layers.",
+code:`Input
+ ↓
+Hidden Layer
+ ↓
+Hidden Layer
+ ↓
+Output`,
+mcq:[
+["Deep Learning commonly uses?","Neural Networks",["SQL","HTML","CSS"]]
+],
+coding:"Name two applications of deep learning."
+}
+},
+},
+
+
+"Cybersecurity":{
+icon:"🔐",
+description:"Learn cybersecurity concepts and protection methods.",
+topics:{
+"Introduction":{
+level:"Beginner",
+desc:"Cybersecurity protects systems, networks and data from attacks.",
+code:`User
+ ↓
+Authentication
+ ↓
+Secure System`,
+mcq:[
+["Cybersecurity protects?","Systems and data",["Only websites","Only phones","Only passwords"]]
+],
+coding:"List three cybersecurity threats."
+},
+"CIA Triad":{
+level:"Beginner",
+desc:"CIA means Confidentiality, Integrity and Availability.",
+code:`C = Confidentiality
+I = Integrity
+A = Availability`,
+mcq:[
+["CIA stands for?","Confidentiality Integrity Availability",["Computer Internet Access","Cyber Information Authentication","None"]]
+],
+coding:"Explain the CIA triad."
+},
+"Authentication":{
+level:"Beginner",
+desc:"Authentication verifies the identity of a user.",
+code:`Username
+   +
+Password
+   ↓
+Authentication`,
+mcq:[
+["Authentication verifies?","Identity",["Speed","Network","Storage"]]
+],
+coding:"Give two examples of authentication methods."
+},
+"Phishing":{
+level:"Intermediate",
+desc:"Phishing attempts to trick users into revealing sensitive information.",
+code:`Fake Message
+     ↓
+User Click
+     ↓
+Fake Website`,
+mcq:[
+["Phishing commonly uses?","Fake messages",["Only hardware","Only databases","Only cables"]]
+],
+coding:"List two ways to identify suspicious messages."
+},
+"Cryptography":{
+level:"Advanced",
+desc:"Cryptography protects information using mathematical techniques.",
+code:`Plain Text
+   ↓
+Encryption
+   ↓
+Cipher Text`,
+mcq:[
+["Encryption converts plaintext into?","Ciphertext",["HTML","Database","Password"]]
+],
+coding:"Explain encryption in simple words."
+}
+}
+
+}
+
+};
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function showHome(){
+    const login=document.getElementById("loginPage");
+    const register=document.getElementById("registerPage");
+    const topic=document.getElementById("topicPage");
+    const home=document.getElementById("homePage");
+    const app=document.getElementById("appPage");
+
+    if(login) login.style.display="none";
+    if(register) register.style.display="none";
+    if(topic) topic.style.display="none";
+    if(app) app.style.display="none";
+    if(home) home.style.display="block";
+
+    window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function openStudy(){
+    const home=document.getElementById("homePage");
+    const topic=document.getElementById("topicPage");
+    const app=document.getElementById("appPage");
+
+    if(home) home.style.display="none";
+    if(topic) topic.style.display="none";
+    if(app) app.style.display="block";
+
+    updateDashboard();
+    window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function openFeature(feature){
+    openStudy();
+
+    if(feature==="notes"){
+        openSkill("C++");
+        return;
+    }
+
+    if(feature==="quiz"){
+        const el=document.getElementById("quizLabSection");
+        if(el){
+            el.scrollIntoView({behavior:"smooth",block:"start"});
+            document.getElementById("customQuizTopic").focus();
+        }
+        return;
+    }
+
+    if(feature==="coding"){
+        openSkill("C++");
+        switchTab("coding", document.querySelector(".tab:nth-child(4)"));
+        return;
+    }
+
+    if(feature==="progress"){
+        document.getElementById("appPage").scrollIntoView({behavior:"smooth"});
+        return;
+    }
+
+    if(feature==="bookmarks"){
+        const el=document.getElementById("library");
+        if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
+        return;
+    }
+
+    if(feature==="achievements"){
+        const el=document.getElementById("achievements");
+        if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
+    }
+}
+
+
+/* =====================================================
+   RENDER SKILLS
+===================================================== */
+
+function renderSkills(filter=""){
+
+    const grid=document.getElementById("skillsGrid");
+
+    grid.innerHTML="";
+
+    Object.keys(skills).forEach(skill=>{
+
+        const query=filter.toLowerCase().trim();
+        const topicMatch=query &&
+            Object.keys(skills[skill].topics).some(topic=>
+                topic.toLowerCase().includes(query)
+            );
+
+        if(
+            query &&
+            !skill.toLowerCase().includes(query) &&
+            !skills[skill].description.toLowerCase().includes(query) &&
+            !topicMatch
+        ){
+            return;
+        }
+
+        const data=skills[skill];
+
+        grid.innerHTML+=`
+
+        <div class="skill-card glass"
+             onclick="openSkill('${skill}')">
+
+            <div class="skill-icon">
+                ${data.icon}
+            </div>
+
+            <h3>${skill}</h3>
+
+            <p>${data.description}</p>
+
+            <br>
+
+            <span class="badge">
+                ${Object.keys(data.topics).length} Topics
+            </span>
+
+        </div>
+
+        `;
+    });
+}
+
+function searchSkills(){
+    const value=document.getElementById("skillSearch").value;
+    renderSkills(value);
+}
+
+
+/* =====================================================
+   TOPIC SYSTEM
+===================================================== */
+
+let currentSkill="";
+let currentTopic="";
+let currentTab="study";
+
+function openSkill(skill){
+
+    currentSkill=skill;
+
+    document.getElementById("homePage").style.display="none";
+    document.getElementById("appPage").style.display="none";
+    document.getElementById("topicPage").style.display="block";
+
+    document.getElementById("skillTitle").innerText=
+        skills[skill].icon+" "+skill;
+
+    renderTopics(skill);
+
+    const firstTopic=Object.keys(skills[skill].topics)[0];
+
+    loadTopic(firstTopic);
+}
+
+function renderTopics(skill){
+
+    const list=document.getElementById("topicList");
+
+    list.innerHTML="";
+
+    Object.keys(skills[skill].topics).forEach(topic=>{
+
+        list.innerHTML+=`
+
+        <button
+        class="topic-btn"
+        onclick="loadTopic('${topic}')">
+
+        ${topic}
+
+        </button>
+
+        `;
+
+    });
+}
+
+function loadTopic(topic){
+
+    currentTopic=topic;
+    currentTab="study";
+
+    const data=skills[currentSkill].topics[topic];
+
+    document.getElementById("topicTitle").innerText=topic;
+
+    document.getElementById("topicDescription").innerHTML=`
+        <span class="badge">${data.level}</span>
+        <br><br>
+        ${data.desc}
+    `;
+
+    document.querySelectorAll(".topic-btn").forEach(btn=>{
+        btn.classList.toggle(
+            "active",
+            btn.innerText.trim()===topic
+        );
+    });
+
+    document.querySelectorAll(".tab").forEach((tab,i)=>{
+        tab.classList.toggle("active",i===0);
+    });
+
+    renderStudy();
+    updateBookmarkButton();
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+function switchTab(tab,button){
+
+    currentTab=tab;
+
+    document.querySelectorAll(".tab").forEach(
+        b=>b.classList.remove("active")
+    );
+
+    button.classList.add("active");
+
+    if(tab==="study") renderStudy();
+    if(tab==="example") renderExample();
+    if(tab==="mcq") renderMCQ();
+    if(tab==="coding") renderCoding();
+    if(tab==="quiz") renderQuiz();
+}
+
+function getNotesKey(){
+    return "skillswap_notes_"+(currentUser?.id||"guest")+"_"+encodeURIComponent(currentSkill+"|"+currentTopic);
+}
+
+function getSavedTopicNotes(){
+    return localStorage.getItem(getNotesKey()) || "";
+}
+
+function saveTopicNotes(){
+    const box=document.getElementById("topicNotesEditor");
+    if(!box) return;
+    localStorage.setItem(getNotesKey(),box.value);
+    const status=document.getElementById("notesSaveStatus");
+    if(status){
+        status.innerHTML="✅ Notes saved on this device.";
+        setTimeout(()=>{ if(status) status.innerHTML=""; },1800);
+    }
+}
+
+function clearTopicNotes(){
+    if(!confirm("Clear your saved notes for this topic?")) return;
+    localStorage.removeItem(getNotesKey());
+    renderStudy();
+}
+
+function renderStudy(){
+    const data=skills[currentSkill].topics[currentTopic];
+    const saved=getSavedTopicNotes();
+
+    document.getElementById("lessonContent").innerHTML=`
+    <div class="content-box">
+        <h2>📖 Study Notes</h2>
+        <p>${escapeHTML(data.desc||"Study this topic and make your own notes.")}</p>
+
+        <div class="notes-editor-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+                <h3>✍️ My Notes</h3>
+                <span id="notesSaveStatus" style="color:#86efac"></span>
+            </div>
+            <textarea id="topicNotesEditor"
+                class="topic-notes-editor"
+                placeholder="Yahan apne notes likho... definitions, important points, examples, formulas, exam notes, etc.">${escapeHTML(saved)}</textarea>
+            <div class="notes-actions">
+                <button class="btn" onclick="saveTopicNotes()">💾 Save Notes</button>
+                <button class="btn btn-outline" onclick="clearTopicNotes()">🗑️ Clear</button>
+            </div>
+        </div>
+
+        <div class="quick-notes">
+            <h3>⚡ Quick Revision</h3>
+            <ul>
+                <li>Understand the basic concept.</li>
+                <li>Write important definitions in My Notes.</li>
+                <li>Practice the example and MCQs.</li>
+                <li>Try the coding practice.</li>
+            </ul>
+        </div>
+    </div>`;
+}
+
+function renderExample(){
+
+    const data=skills[currentSkill].topics[currentTopic];
+
+    document.getElementById("lessonContent").innerHTML=`
+
+    <div class="content-box">
+
+        <h2>💻 Code Example</h2>
+
+        <div class="code-box">
+            <pre>${escapeHTML(data.code)}</pre>
+        </div>
+
+        <br>
+
+        <p>
+        Study the example carefully and try changing
+        the values yourself.
+        </p>
+
+    </div>
+
+    `;
+}
+
+function renderMCQ(){
+
+    const data=skills[currentSkill].topics[currentTopic];
+
+    let html=`
+    <div class="content-box">
+    <h2>📝 Practice MCQs</h2>
+    <br>
+    `;
+
+    data.mcq.forEach((q,i)=>{
+
+        html+=`
+
+        <div class="mcq">
+
+            <h3>Q${i+1}. ${q[0]}</h3>
+
+            <div
+            class="option"
+            onclick="checkAnswer(this,true)">
+            ${q[1]}
+            </div>
+
+            ${q[2].map(o=>`
+                <div
+                class="option"
+                onclick="checkAnswer(this,false)">
+                ${o}
+                </div>
+            `).join("")}
+
+        </div>
+
+        `;
+
+    });
+
+    html+=`</div>`;
+
+    document.getElementById("lessonContent").innerHTML=html;
+}
+
+function checkAnswer(element,correct){
+
+    if(correct){
+
+        element.classList.add("correct");
+        element.innerText="✓ "+element.innerText;
+
+    }else{
+
+        element.classList.add("wrong");
+
+    }
+}
+
+
+/* =====================================================
+   CODING PRACTICE
+===================================================== */
+
+let codingPracticeQuestions=[];
+
+function buildCodingPracticeQuestions(count){
+    const data=skills[currentSkill].topics[currentTopic];
+    const topic=currentTopic;
+    const base=data.coding || `Practice the ${topic} concept with a small program.`;
+    const templates=[
+        `Write a program to practice ${topic}.`,
+        `Create a simple example using ${topic}.`,
+        `Solve a beginner problem based on ${topic}.`,
+        `Write code that demonstrates ${topic}.`,
+        `Create an input/output based exercise using ${topic}.`,
+        `Write a program using ${topic} and explain each step.`,
+        `Solve a real-world style problem using ${topic}.`,
+        `Write a second example of ${topic} without copying the previous code.`,
+        `Create a small challenge where ${topic} is the main concept.`,
+        `Write and test a program that applies ${topic}.`
+    ];
+
+    const questions=[];
+    for(let i=0;i<count;i++){
+        const template=templates[i%templates.length];
+        const level=i<Math.ceil(count*.33)?"Beginner":i<Math.ceil(count*.66)?"Intermediate":"Challenge";
+        questions.push({
+            number:i+1,
+            level,
+            question:i===0 ? base : `${template} Add your own test case and explain the output.`
+        });
+    }
+    return questions;
+}
+
+function renderCoding(){
+    const data=skills[currentSkill].topics[currentTopic];
+
+    document.getElementById("lessonContent").innerHTML=`
+    <div class="content-box">
+        <div class="coding-header">
+            <div>
+                <h2>👨‍💻 Coding Practice</h2>
+                <p>Practice ${escapeHTML(currentTopic)} with multiple coding challenges.</p>
+            </div>
+            <span class="badge">${escapeHTML(data.level||"Practice")}</span>
+        </div>
+
+        <div class="coding-controls">
+            <label><b>Number of Questions</b></label>
+            <select id="codingQuestionCount">
+                ${[10,20,30,40,50,60,70,80,90,100].map(n=>`<option value="${n}" ${n===20?"selected":""}>${n} Questions</option>`).join("")}
+            </select>
+            <button class="btn" onclick="startCodingPractice()">🚀 Start Practice</button>
+        </div>
+
+        <div class="coding-original">
+            <h3>🎯 Topic Challenge</h3>
+            <p>${escapeHTML(data.coding||"Practice this topic by writing your own program.")}</p>
+        </div>
+
+        <div id="codingPracticeArea">
+            <p style="color:#cbd5e1">Choose 10–100 questions and start your coding practice.</p>
+        </div>
+    </div>`;
+}
+
+function startCodingPractice(){
+    const count=parseInt(document.getElementById("codingQuestionCount")?.value,10)||20;
+    codingPracticeQuestions=buildCodingPracticeQuestions(count);
+
+    const area=document.getElementById("codingPracticeArea");
+    if(!area) return;
+
+    area.innerHTML=`
+        <div class="coding-practice-toolbar">
+            <b>🔥 ${codingPracticeQuestions.length} Coding Questions</b>
+            <button class="btn btn-outline" onclick="showCodingSolution()">💻 Show Topic Example</button>
+        </div>
+        ${codingPracticeQuestions.map(q=>`
+            <div class="coding-question-card">
+                <div class="coding-q-top">
+                    <b>Q${q.number}</b>
+                    <span class="badge">${q.level}</span>
+                </div>
+                <p>${escapeHTML(q.question)}</p>
+                <textarea class="coding-answer-box" placeholder="Yahan apna code likho..."></textarea>
+                <button class="btn btn-outline" onclick="toggleCodingAnswer(this)">👁️ Show/Hide Answer Area</button>
+            </div>
+        `).join("")}
+    `;
+}
+
+function toggleCodingAnswer(button){
+    const box=button.previousElementSibling;
+    if(box) box.focus();
+}
+
+function showCodingHint(){
+
+    document.getElementById("codingHelp").innerHTML=`
+
+    <div class="content-box" style="margin-top:15px">
+        💡 <b>Hint:</b> First break the problem into
+        small steps and identify the required input,
+        processing and output.
+    </div>
+
+    `;
+}
+
+function showCodingSolution(){
+
+    const data=skills[currentSkill].topics[currentTopic];
+
+    document.getElementById("codingHelp").innerHTML=`
+
+    <div class="code-box">
+        <pre>${escapeHTML(data.code)}</pre>
+    </div>
+
+    `;
+}
+
+
+/* =====================================================
+   SMART QUIZ ENGINE
+===================================================== */
+
+let quizQuestions=[];
+let quizIndex=0;
+let quizCorrect=0;
+let quizWrong=[];
+let quizMode="normal";
+let quizTimer=null;
+let quizSecondsLeft=0;
+let quizAnswerLocked=false;
+
+function setQuizMode(mode,button){
+    quizMode=mode;
+    document.querySelectorAll(".quiz-chip").forEach(b=>b.classList.remove("active"));
+    if(button) button.classList.add("active");
+}
+
+function allMCQBank(){
+    const bank=[];
+    Object.keys(skills).forEach(skill=>{
+        Object.keys(skills[skill].topics).forEach(topic=>{
+            const t=skills[skill].topics[topic];
+            (t.mcq||[]).forEach(q=>{
+                bank.push({
+                    skill,topic,
+                    question:q[0],
+                    answer:q[1],
+                    wrong:q[2]||[],
+                    desc:t.desc||"",
+                    code:t.code||"",
+                    coding:t.coding||""
+                });
+            });
+        });
+    });
+    return bank;
+}
+
+function findTopicMatches(query){
+    query=(query||"").toLowerCase().trim();
+    if(!query) return [];
+    const matches=[];
+    Object.keys(skills).forEach(skill=>{
+        Object.keys(skills[skill].topics).forEach(topic=>{
+            const t=skills[skill].topics[topic];
+            const hay=(skill+" "+topic+" "+t.desc+" "+t.coding).toLowerCase();
+            if(hay.includes(query) || query.includes(topic.toLowerCase()) || query.includes(skill.toLowerCase())){
+                matches.push({skill,topic,data:t});
+            }
+        });
+    });
+    return matches;
+}
+
+function shuffleArray(arr){
+    return arr.map(v=>({v,sort:Math.random()})).sort((a,b)=>a.sort-b.sort).map(x=>x.v);
+}
+
+function expandTopicBases(matches){
+    const bases=[];
+    matches.forEach(m=>{
+        const t=m.data;
+        (t.mcq||[]).forEach(q=>bases.push({
+            kind:"mcq", skill:m.skill, topic:m.topic,
+            question:q[0], answer:q[1], wrong:q[2]||[],
+            desc:t.desc||"", coding:t.coding||"", level:t.level||""
+        }));
+
+        if(t.desc){
+            const descAnswer=t.desc.trim();
+            const otherDescs=matches.map(x=>(x.data.desc||"").trim()).filter(x=>x && x!==descAnswer);
+            bases.push({
+                kind:"desc",skill:m.skill,topic:m.topic,
+                question:`Which statement best describes ${m.topic}?`,
+                answer:descAnswer,
+                wrong:otherDescs.slice(0,3),
+                desc:t.desc,coding:t.coding,level:t.level
+            });
+        }
+
+        if(t.coding){
+            const task=t.coding.trim();
+            const otherTasks=matches.map(x=>(x.data.coding||"").trim()).filter(x=>x && x!==task);
+            bases.push({
+                kind:"task",skill:m.skill,topic:m.topic,
+                question:`Which practice task is associated with ${m.topic}?`,
+                answer:task,
+                wrong:otherTasks.slice(0,3),
+                desc:t.desc,coding:t.coding,level:t.level
+            });
+        }
+
+        if(t.level){
+            bases.push({
+                kind:"level",skill:m.skill,topic:m.topic,
+                question:`What learning level is assigned to ${m.topic} in this study library?`,
+                answer:t.level,
+                wrong:["Beginner","Intermediate","Advanced"].filter(x=>x!==t.level).slice(0,3),
+                desc:t.desc,coding:t.coding,level:t.level
+            });
+        }
+    });
+    return bases;
+}
+
+function makeGeneratedQuestion(base,index,difficulty){
+    const genericTemplates=[
+        `Which statement best matches ${base.topic}?`,
+        `A student is revising ${base.topic}. Which option is most appropriate?`,
+        `Which choice is directly associated with ${base.topic}?`,
+        `While studying ${base.topic}, which option should be selected?`,
+        `Which option correctly connects to the concept ${base.topic}?`,
+        `Which item belongs with ${base.topic}?`
+    ];
+
+    let correct=base.answer;
+    let wrongs=Array.from(new Set((base.wrong||[]).filter(x=>x && x!==correct)));
+
+    const global=allMCQBank().flatMap(x=>[x.answer,...(x.wrong||[])])
+        .filter(Boolean)
+        .filter(x=>x!==correct);
+    wrongs=Array.from(new Set(wrongs.concat(shuffleArray(global)))).slice(0,3);
+
+    while(wrongs.length<3){
+        wrongs.push(["Not related to the topic","Another study concept","No valid option"][wrongs.length]||"Other concept");
+    }
+
+    let question;
+    if(base.kind==="mcq" && index===0){
+        question=base.question;
+    }else{
+        question=genericTemplates[index%genericTemplates.length];
+    }
+
+    return {
+        id:"smart_"+index+"_"+Math.random().toString(36).slice(2),
+        question,
+        answer:correct,
+        options:shuffleArray([correct,...wrongs]),
+        explanation:base.kind==="desc"
+            ? `This description comes from the ${base.topic} topic in your study library.`
+            : base.kind==="task"
+            ? `This practice task is listed under ${base.topic} in your study library.`
+            : base.kind==="level"
+            ? `The study library labels ${base.topic} as ${base.level}.`
+            : `Review ${base.topic}: ${base.desc || "Revise the topic concept and example."}`,
+        sourceTopic:base.topic,
+        difficulty
+    };
+}
+
+function makeNotesQuestions(topic,notes,count,difficulty){
+    const sentences=(notes||"")
+        .replace(/\\s+/g," ")
+        .split(/[.!?]+/)
+        .map(s=>s.trim())
+        .filter(s=>s.length>25);
+
+    if(sentences.length<1) return [];
+
+    const out=[];
+    const styles=[
+        s=>`According to the notes about ${topic}, which statement is supported by this content: "${s}"?`,
+        s=>`Which key idea is directly mentioned in the ${topic} notes: "${s}"?`,
+        s=>`While revising ${topic}, which point matches the provided notes: "${s}"?`,
+        s=>`Which option belongs to the provided ${topic} study material: "${s}"?`
+    ];
+
+    for(let i=0;i<count;i++){
+        const sentence=sentences[i%sentences.length];
+        const words=sentence.split(/\\s+/).filter(w=>w.replace(/[^A-Za-z0-9+#.-]/g,"").length>3);
+        if(!words.length) continue;
+
+        const cleanWords=words.map(w=>w.replace(/^[,;:()]+|[,;:()]+$/g,"")).filter(Boolean);
+        const answer=cleanWords[(i*3)%cleanWords.length];
+        let distractors=shuffleArray(cleanWords.filter(w=>w.toLowerCase()!==answer.toLowerCase())).slice(0,3);
+
+        const fallback=["concept","method","example","process","value","result","feature","step"];
+        for(const f of fallback){
+            if(distractors.length>=3) break;
+            if(f.toLowerCase()!==answer.toLowerCase() && !distractors.some(x=>x.toLowerCase()===f))
+                distractors.push(f);
+        }
+
+        out.push({
+            id:"notes_"+i+"_"+Math.random().toString(36).slice(2),
+            question:styles[i%styles.length](sentence),
+            answer,
+            options:shuffleArray([answer,...distractors.slice(0,3)]),
+            explanation:"This question is generated from the notes you provided.",
+            sourceTopic:topic,
+            difficulty
+        });
+    }
+    return out;
+}
+
+function buildSmartQuestions(topic,count,difficulty,notes){
+    const matches=findTopicMatches(topic);
+    let bases=expandTopicBases(matches);
+
+    if(!bases.length && notes.trim()){
+        const nq=makeNotesQuestions(topic,notes,count,difficulty);
+        if(nq.length) return fillQuestionCount(nq,count);
+    }
+
+    if(!bases.length){
+        bases=expandTopicBases(
+            Object.keys(skills).flatMap(skill=>
+                Object.keys(skills[skill].topics).map(t=>({
+                    skill,topic:t,data:skills[skill].topics[t]
+                }))
+            )
+        );
+    }
+
+    bases=shuffleArray(bases);
+
+    // If the exact topic has fewer concepts, keep cycling through
+    // different question constructions so 20/25/30-question practice is possible.
+    const out=[];
+    for(let i=0;i<count;i++){
+        out.push(makeGeneratedQuestion(bases[i%bases.length],i,difficulty));
+    }
+    return out;
+}
+
+function fillQuestionCount(arr,count){
+    if(!arr.length) return arr;
+    const out=[];
+    for(let i=0;i<count;i++) out.push({...arr[i%arr.length],id:"q_"+i+"_"+Math.random().toString(36).slice(2)});
+    return out;
+}
+
+function startSmartQuiz(){
+    const topic=(document.getElementById("customQuizTopic").value||"").trim();
+    const notes=(document.getElementById("customQuizNotes").value||"").trim();
+    const count=parseInt(document.getElementById("customQuizCount").value,10)||20;
+    const difficulty=document.getElementById("customQuizDifficulty").value||"mixed";
+
+    if(!topic){
+        alert("Please enter a topic first.");
+        document.getElementById("customQuizTopic").focus();
+        return;
+    }
+
+    quizQuestions=buildSmartQuestions(topic,count,difficulty,notes);
+    if(!quizQuestions.length){
+        alert("Add a topic or paste some study notes.");
+        return;
+    }
+
+    quizIndex=0;
+    quizCorrect=0;
+    quizWrong=[];
+    quizAnswerLocked=false;
+
+    const msg=document.getElementById("smartQuizMessage");
+    if(msg){
+        msg.innerHTML=`<b>Quiz ready:</b> ${quizQuestions.length} questions on <b>${escapeHTML(topic)}</b>.`;
+    }
+
+    if(quizTimer) clearInterval(quizTimer);
+    if(quizMode==="timed"){
+        quizSecondsLeft=count*30;
+        quizTimer=setInterval(()=>{
+            quizSecondsLeft--;
+            const el=document.getElementById("quizClock");
+            if(el) el.textContent=formatQuizTime(quizSecondsLeft);
+            if(quizSecondsLeft<=0){
+                clearInterval(quizTimer);
+                finishSmartQuiz(true);
+            }
+        },1000);
+    }
+
+    openStudy();
+    const lab=document.getElementById("quizLabSection");
+    if(lab) lab.style.display="none";
+
+    const topicMatches=findTopicMatches(topic);
+    if(topicMatches.length){
+        currentSkill=topicMatches[0].skill;
+        currentTopic=topicMatches[0].topic;
+    }
+
+    document.getElementById("topicPage").style.display="block";
+    document.getElementById("appPage").style.display="none";
+    showSmartQuizQuestion();
+}
+
+function formatQuizTime(sec){
+    sec=Math.max(0,sec);
+    return String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0");
+}
+
+function showSmartQuizQuestion(){
+    if(quizIndex>=quizQuestions.length){
+        finishSmartQuiz(false);
+        return;
+    }
+
+    const q=quizQuestions[quizIndex];
+    quizAnswerLocked=false;
+
+    let html=`
+    <div class="content-box">
+        <div class="quiz-topbar">
+            <b>🧠 Smart Quiz</b>
+            <span>Question ${quizIndex+1} / ${quizQuestions.length}</span>
+            ${quizMode==="timed" ? `<span id="quizClock">⏱️ ${formatQuizTime(quizSecondsLeft)}</span>` : ""}
+        </div>
+
+        <div class="quiz-progress-wrap">
+            <div class="quiz-progress-fill" style="width:${((quizIndex)/quizQuestions.length)*100}%"></div>
+        </div>
+
+        <p style="color:#cbd5e1">${escapeHTML(q.sourceTopic||"Custom Topic")} · ${escapeHTML(q.difficulty||"mixed")}</p>
+        <br>
+        <h3>${escapeHTML(q.question)}</h3>
+        <br>
+        <div id="smartQuizOptions">
+    `;
+
+    q.options.forEach((option,i)=>{
+        html+=`
+        <button class="quiz-option" data-option="${escapeHTML(option)}"
+            onclick="answerSmartQuiz(this,'${escapeJS(option)}')">
+            <b>${String.fromCharCode(65+i)}.</b> ${escapeHTML(option)}
+        </button>`;
+    });
+
+    html+=`
+        </div>
+        <div id="quizFeedback"></div>
+        <br>
+        <button class="btn btn-outline" onclick="skipSmartQuiz()">⏭️ Skip</button>
+    </div>`;
+
+    document.getElementById("lessonContent").innerHTML=html;
+}
+
+function answerSmartQuiz(button,answer){
+    if(quizAnswerLocked) return;
+    quizAnswerLocked=true;
+
+    const q=quizQuestions[quizIndex];
+    const correct=answer===q.answer;
+
+    document.querySelectorAll(".quiz-option").forEach(b=>b.disabled=true);
+
+    if(correct){
+        button.classList.add("correct");
+        quizCorrect++;
+    }else{
+        button.classList.add("wrong");
+        document.querySelectorAll(".quiz-option").forEach(b=>{
+            if(b.getAttribute("data-option")===q.answer) b.classList.add("correct");
+        });
+        quizWrong.push({...q,userAnswer:answer});
+    }
+
+    const feedback=document.getElementById("quizFeedback");
+    if(feedback){
+        feedback.innerHTML=`<div class="quiz-explain">${correct?"✅ Correct! ":"❌ Not quite. "}${escapeHTML(q.explanation)}</div>`;
+    }
+
+    setTimeout(()=>{
+        quizIndex++;
+        showSmartQuizQuestion();
+    }, quizMode==="exam" ? 250 : 900);
+}
+
+function skipSmartQuiz(){
+    if(quizAnswerLocked) return;
+    quizAnswerLocked=true;
+    quizWrong.push({...quizQuestions[quizIndex],userAnswer:"Skipped"});
+    quizIndex++;
+    showSmartQuizQuestion();
+}
+
+function finishSmartQuiz(timeUp){
+    if(quizTimer) clearInterval(quizTimer);
+    quizTimer=null;
+
+    const total=quizQuestions.length;
+    const score=Math.round((quizCorrect/total)*100);
+    if(score>(currentUser.quizScore||0)) currentUser.quizScore=score;
+
+    currentUser.quizAttempts=(currentUser.quizAttempts||0)+1;
+    currentUser.lastQuizScore=score;
+    currentUser.quizBest= Math.max(currentUser.quizBest||0, score);
+    currentUser.quizHistory=currentUser.quizHistory||[];
+    currentUser.quizHistory.unshift({
+        date:new Date().toLocaleDateString(),
+        score,
+        correct:quizCorrect,
+        total,
+        mode:quizMode
+    });
+    currentUser.quizHistory=currentUser.quizHistory.slice(0,10);
+    saveCurrentUser();
+
+    document.getElementById("topicPage").style.display="block";
+    document.getElementById("lessonContent").innerHTML=`
+    <div class="content-box" style="text-align:center">
+        <h2>${timeUp?"⏰ Time Up!":"🎉 Quiz Completed!"}</h2>
+        <div style="font-size:54px;margin:15px">${score}%</div>
+
+        <div class="quiz-result-grid">
+            <div class="quiz-result-card"><b>${quizCorrect}</b><br>Correct</div>
+            <div class="quiz-result-card"><b>${quizWrong.length}</b><br>Review</div>
+            <div class="quiz-result-card"><b>${total}</b><br>Total</div>
+            <div class="quiz-result-card"><b>${quizMode}</b><br>Mode</div>
+        </div>
+
+        <button class="btn" onclick="restartSmartQuiz()">🔄 Retry Quiz</button>
+        <button class="btn btn-outline" onclick="reviewWrongAnswers()">🔎 Review Mistakes</button>
+        <button class="btn btn-outline" onclick="backToQuizLab()">🧠 New Quiz</button>
+    </div>`;
+    updateDashboard();
+}
+
+function restartSmartQuiz(){
+    quizIndex=0;
+    quizCorrect=0;
+    quizWrong=[];
+    quizQuestions=shuffleArray(quizQuestions);
+    showSmartQuizQuestion();
+}
+
+function reviewWrongAnswers(){
+    if(!quizWrong.length){
+        alert("Great! You have no wrong answers to review. 🎉");
+        return;
+    }
+    const items=quizWrong;
+    let html=`<div class="content-box"><h2>🔎 Mistake Review</h2><br>`;
+    items.forEach((q,i)=>{
+        html+=`
+        <div class="quiz-explain" style="margin-bottom:12px">
+            <b>${i+1}. ${escapeHTML(q.question)}</b><br><br>
+            Your answer: <span style="color:#fca5a5">${escapeHTML(q.userAnswer)}</span><br>
+            Correct answer: <span style="color:#86efac">${escapeHTML(q.answer)}</span><br>
+            <small>${escapeHTML(q.explanation)}</small>
+        </div>`;
+    });
+    html+=`<button class="btn" onclick="restartSmartQuiz()">🔄 Try Again</button></div>`;
+    document.getElementById("lessonContent").innerHTML=html;
+}
+
+function backToQuizLab(){
+    document.getElementById("topicPage").style.display="none";
+    document.getElementById("appPage").style.display="block";
+    const lab=document.getElementById("quizLabSection");
+    if(lab) lab.style.display="block";
+    if(lab) lab.scrollIntoView({behavior:"smooth"});
+}
+
+function renderQuiz(){
+    const topic=(currentSkill||"")+" "+(currentTopic||"");
+    document.getElementById("customQuizTopic").value=currentTopic||currentSkill||"";
+    startSmartQuiz();
+}
+
+/* =====================================================
+   BOOKMARK
+===================================================== */
+
+function toggleBookmark(){
+
+    const id=currentSkill+"|"+currentTopic;
+
+    if(!currentUser.bookmarks){
+        currentUser.bookmarks=[];
+    }
+
+    const index=currentUser.bookmarks.indexOf(id);
+
+    if(index===-1){
+
+        currentUser.bookmarks.push(id);
+        alert("Topic bookmarked 🔖");
+
+    }else{
+
+        currentUser.bookmarks.splice(index,1);
+        alert("Bookmark removed.");
+
+    }
+
+    saveCurrentUser();
+    updateBookmarkButton();
+    updateDashboard();
+}
+
+function updateBookmarkButton(){
+
+    const id=currentSkill+"|"+currentTopic;
+
+    const saved=currentUser &&
+        currentUser.bookmarks &&
+        currentUser.bookmarks.includes(id);
+
+    document.getElementById("bookmarkBtn").innerText=
+        saved ? "🔖 Bookmarked" : "🔖 Bookmark";
+}
+
+
+/* =====================================================
+   COMPLETE TOPIC
+===================================================== */
+
+function markComplete(){
+
+    const id=currentSkill+"|"+currentTopic;
+
+    if(!currentUser.completed.includes(id)){
+
+        currentUser.completed.push(id);
+
+        saveCurrentUser();
+
+        alert("Topic completed! 🎉");
+
+        updateDashboard();
+
+    }else{
+
+        alert("This topic is already completed.");
+
+    }
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function updateDashboard(){
+
+    if(!currentUser) return;
+
+    document.getElementById("welcomeUser").innerText=
+        "Welcome, "+currentUser.name+" 👋";
+
+    document.getElementById("avatar").innerText=
+        currentUser.name.charAt(0).toUpperCase();
+
+    document.getElementById("completedCount").innerText=
+        currentUser.completed.length;
+
+    document.getElementById("bookmarkCount").innerText=
+        currentUser.bookmarks.length;
+
+    document.getElementById("quizScore").innerText=
+        (currentUser.quizScore || 0)+"%";
+
+    document.getElementById("streak").innerText=
+        calculateStreak()+" 🔥";
+
+    renderLibrary();
+    renderTodos();
+    renderAchievements();
+}
+
+
+/* =====================================================
+   LIBRARY
+===================================================== */
+
+function renderLibrary(){
+
+    const box=document.getElementById("library");
+
+    if(!currentUser.bookmarks.length){
+
+        box.innerHTML=`
+        <div class="glass content-box">
+            No bookmarks yet 🔖
+            <br>
+            Open a topic and bookmark it.
+        </div>
+        `;
+
+        return;
+    }
+
+    box.innerHTML="";
+
+    currentUser.bookmarks.forEach(id=>{
+
+        const parts=id.split("|");
+        const skill=parts[0];
+        const topic=parts[1];
+
+        box.innerHTML+=`
+
+        <div class="library-card glass">
+
+            <div>
+                <h3>
+                    ${skills[skill].icon}
+                    ${skill}
+                </h3>
+
+                <p style="color:#cbd5e1">
+                    ${topic}
+                </p>
+            </div>
+
+            <button
+            class="btn"
+            onclick="openSkill('${skill}');loadTopic('${topic}')">
+
+            Study
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+}
+
+
+/* =====================================================
+   TODO
+===================================================== */
+
+function addTodo(){
+
+    const input=document.getElementById("todoInput");
+
+    const text=input.value.trim();
+
+    if(!text) return;
+
+    currentUser.todos.push({
+        id:Date.now(),
+        text,
+        done:false
+    });
+
+    input.value="";
+
+    saveCurrentUser();
+    renderTodos();
+}
+
+function renderTodos(){
+
+    const list=document.getElementById("todoList");
+
+    list.innerHTML="";
+
+    currentUser.todos.forEach(todo=>{
+
+        list.innerHTML+=`
+
+        <div class="todo ${todo.done ? "done":""}">
+
+            <span onclick="toggleTodo(${todo.id})">
+                ${todo.done ? "✅":"⬜"} ${escapeHTML(todo.text)}
+            </span>
+
+            <button
+            onclick="deleteTodo(${todo.id})">
+            ❌
+            </button>
+
+        </div>
+
+        `;
+
+    });
+}
+
+function toggleTodo(id){
+
+    const todo=currentUser.todos.find(t=>t.id===id);
+
+    if(todo){
+        todo.done=!todo.done;
+    }
+
+    saveCurrentUser();
+    renderTodos();
+}
+
+function deleteTodo(id){
+
+    currentUser.todos=
+        currentUser.todos.filter(t=>t.id!==id);
+
+    saveCurrentUser();
+    renderTodos();
+}
+
+
+/* =====================================================
+   ACHIEVEMENTS
+===================================================== */
+
+function renderAchievements(){
+
+    const box=document.getElementById("achievements");
+
+    const completed=currentUser.completed.length;
+    const bookmarks=currentUser.bookmarks.length;
+    const score=currentUser.quizScore || 0;
+
+    const achievements=[
+
+        {
+            icon:"🌱",
+            title:"First Step",
+            desc:"Complete your first topic",
+            unlocked:completed>=1
+        },
+
+        {
+            icon:"📚",
+            title:"Bookworm",
+            desc:"Bookmark 3 topics",
+            unlocked:bookmarks>=3
+        },
+
+        {
+            icon:"🎯",
+            title:"Quiz Master",
+            desc:"Get 80% or more in a quiz",
+            unlocked:score>=80
+        },
+
+        {
+            icon:"🔥",
+            title:"Learner",
+            desc:"Complete 5 topics",
+            unlocked:completed>=5
+        },
+
+        {
+            icon:"🏆",
+            title:"Study Champion",
+            desc:"Complete 10 topics",
+            unlocked:completed>=10
+        }
+
+    ];
+
+    box.innerHTML=achievements.map(a=>`
+
+        <div class="feature glass"
+             style="opacity:${a.unlocked?1:.45}">
+
+            <div class="feature-icon">
+                ${a.icon}
+            </div>
+
+            <h3>${a.title}</h3>
+
+            <p>${a.desc}</p>
+
+            <br>
+
+            <span class="badge">
+                ${a.unlocked ? "Unlocked":"Locked"}
+            </span>
+
+        </div>
+
+    `).join("");
+}
+
+
+/* =====================================================
+   STUDY STREAK
+===================================================== */
+
+function calculateStreak(){
+
+    const today=new Date().toDateString();
+
+    const key="skillswap_streak_"+currentUser.id;
+
+    let data=JSON.parse(
+        localStorage.getItem(key) || 
+        '{"count":0,"last":""}'
+    );
+
+    if(data.last!==today){
+
+        if(data.last){
+
+            const previous=new Date(data.last);
+            const current=new Date(today);
+
+            const difference=
+                Math.floor(
+                    (current-previous)/(1000*60*60*24)
+                );
+
+            if(difference===1){
+                data.count++;
+            }else{
+                data.count=1;
+            }
+
+        }else{
+            data.count=1;
+        }
+
+        data.last=today;
+
+        localStorage.setItem(key,JSON.stringify(data));
+
+    }
+
+    return data.count;
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+let timerSeconds=25*60;
+let timerInterval=null;
+
+function updateTimer(){
+
+    const minutes=
+        Math.floor(timerSeconds/60)
+        .toString()
+        .padStart(2,"0");
+
+    const seconds=
+        (timerSeconds%60)
+        .toString()
+        .padStart(2,"0");
+
+    document.getElementById("timerDisplay").innerText=
+        `${minutes}:${seconds}`;
+}
+
+function startTimer(){
+
+    if(timerInterval) return;
+
+    timerInterval=setInterval(()=>{
+
+        if(timerSeconds>0){
+
+            timerSeconds--;
+            updateTimer();
+
+        }else{
+
+            clearInterval(timerInterval);
+            timerInterval=null;
+
+            alert("Study session completed! 🎉");
+
+        }
+
+    },1000);
+}
+
+function pauseTimer(){
+
+    clearInterval(timerInterval);
+    timerInterval=null;
+}
+
+function resetTimer(){
+
+    pauseTimer();
+
+    timerSeconds=25*60;
+
+    updateTimer();
+}
+
+
+/* =====================================================
+   SAVE
+===================================================== */
+
+function saveCurrentUser(){
+    if(!currentUser) return;
+    localStorage.setItem("skillswap_guest",JSON.stringify(currentUser));
+    localStorage.setItem("skillswap_current",JSON.stringify(currentUser));
+}
+
+
+/* =====================================================
+   SECURITY / HELPERS
+===================================================== */
+
+function escapeHTML(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+function escapeJS(text){
+
+    return String(text)
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'");
+}
+
+
+/* =====================================================
+   START APP
+===================================================== */
+
+renderSkills();
+updateTimer();
+showHome();
+
+</script>
+
+</body>
+</html>
